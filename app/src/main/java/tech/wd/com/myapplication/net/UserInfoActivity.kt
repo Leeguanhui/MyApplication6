@@ -13,7 +13,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 class UserInfoActivity : AppCompatActivity() {
-    val baseUrl: String = "https://mobile.bwstudent.com/techApi/information/v1/"
+    val baseUrl: String = "https://mobile.bwstudent.com/techApi/"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_net)
@@ -72,7 +72,10 @@ class UserInfoActivity : AppCompatActivity() {
             .enqueue(object :Callback<HomeListData>{
                 override fun onResponse(call: Call<HomeListData>, response: Response<HomeListData>) {
                     println(response?.message())
-                    tt.setText(response?.message())
+                    val body = response?.body()
+                    val result = body?.result
+                    tt.text = result?.get(0)?.title
+                    println(result?.get(0)?.thumbnail)
                 }
 
                 override fun onFailure(call: Call<HomeListData>, t: Throwable) {

@@ -17,7 +17,7 @@ interface Api {
     @GET("users/HexlDL/followers")
     fun getFollowers():Observable<List<FollowersEntity>>
 
-    @GET("infoRecommendList/{plateId}/{page}/{count}")
+    @GET("information/v1/infoRecommendList")
     fun getList(@Query("plateId") plateId: Int, @Query("page") page: Int, @Query("count") count: Int): Call<HomeListData>
     @GET("infoRecommendList/{plateId}{page}{count}")
     fun getLists(@Query("plateId") plateId: Int, @Query("page") page: Int, @Query("count") count: Int): Call<Result>
