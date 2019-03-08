@@ -2,8 +2,8 @@ package tech.wd.com.myapplication.net
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.widget.TextView
-import kotlinx.android.synthetic.main.activity_net.*
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import tech.wd.com.myapplication.R
 import retrofit2.Call
 import retrofit2.Callback
@@ -11,6 +11,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import tech.wd.com.myapplication.NewsAdapter
 
 class UserInfoActivity : AppCompatActivity() {
     val baseUrl: String = "https://mobile.bwstudent.com/techApi/"
@@ -19,6 +20,9 @@ class UserInfoActivity : AppCompatActivity() {
         setContentView(R.layout.activity_net)
         //val listView = findViewById<ListView>(R.id.listview)
         //val t = findViewById<TextView>(R.id.tt)
+        val recyclerView = findViewById<RecyclerView>(R.id.recy) as RecyclerView
+        recyclerView.layoutManager = LinearLayoutManager(this)
+
         val retrofit = Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -74,8 +78,9 @@ class UserInfoActivity : AppCompatActivity() {
                     println(response?.message())
                     val body = response?.body()
                     val result = body?.result
-                    tt.text = result?.get(0)?.title
+                    //tt.text = result?.get(0)?.title
                     println(result?.get(0)?.thumbnail)
+                    recyclerView.adapter=NewsAdapter(this,result)
                 }
 
                 override fun onFailure(call: Call<HomeListData>, t: Throwable) {
