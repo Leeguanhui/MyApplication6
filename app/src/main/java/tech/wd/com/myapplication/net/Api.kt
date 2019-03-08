@@ -4,6 +4,8 @@ import io.reactivex.Observable
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
+import java.util.concurrent.atomic.AtomicInteger
 
 interface Api {
     @GET("users/{path}")
@@ -14,4 +16,9 @@ interface Api {
 
     @GET("users/HexlDL/followers")
     fun getFollowers():Observable<List<FollowersEntity>>
+
+    @GET("infoRecommendList/{plateId}/{page}/{count}")
+    fun getList(@Query("plateId") plateId: Int, @Query("page") page: Int, @Query("count") count: Int): Call<HomeListData>
+    @GET("infoRecommendList/{plateId}{page}{count}")
+    fun getLists(@Query("plateId") plateId: Int, @Query("page") page: Int, @Query("count") count: Int): Call<Result>
 }
