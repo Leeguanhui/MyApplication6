@@ -1,6 +1,7 @@
 package tech.wd.com.myapplication
 
 import android.net.Uri
+import android.support.v7.view.menu.MenuView
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
@@ -31,7 +32,8 @@ class NewsAdapter(userInfoActivity: Callback<HomeListData>,var result: List<Resu
             writer?.text=result!!.get(p1).source
             data?.text=result!!.get(p1).releaseTime.toString()
             share?.text=result!!.get(p1).share.toString()
-            
+
+
         }
     }
 
